@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "mofesola/money-transfer-app",
+    "description": "Samta - Simple Accounts and Money Transfers Application",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
