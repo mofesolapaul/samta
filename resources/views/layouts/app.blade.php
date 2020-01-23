@@ -34,7 +34,7 @@
                                 <li><a href="{{ route('register') }}">Register</a></li>
                             @else
                                 <li>
-                                    <a href="#">{{ Auth::user()->name }}</a>
+                                    <a href="#" uk-icon="heart">{{ Auth::user()->name }}</a>
                                     <div class="uk-navbar-dropdown">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
                                             <li>

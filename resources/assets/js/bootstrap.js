@@ -53,3 +53,9 @@ if (token) {
 //     cluster: 'mt1',
 //     encrypted: true
 // });
+
+// import uikit
+window.UIKit = require('uikit');
+const icons = require('uikit/dist/js/uikit-icons');
+
+UIKit.use(icons);
