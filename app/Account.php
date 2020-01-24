@@ -8,6 +8,11 @@ class Account extends Model
 {
     public function currency()
     {
-        return $this->hasOne(Currency::class);
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

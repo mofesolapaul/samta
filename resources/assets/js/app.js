@@ -6,3 +6,7 @@
  */
 
 require('./bootstrap');
+
+$(function () {
+    UIKit.offcanvas($('#offcanvas-slide')).show();
+});

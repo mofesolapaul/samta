@@ -14,6 +14,8 @@ $large-max: 1219px;
 $xlarge-min: 1220px;
 
 // UIkit 3
+$offcanvas-bar-background: #fff;
+$offcanvas-bar-color-mode: none;
 
 // Base
 @import 'node_modules/uikit/src/scss/variables.scss';

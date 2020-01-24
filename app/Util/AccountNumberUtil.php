@@ -11,7 +11,7 @@ namespace App\Util;
 
 use RandomLib\Factory as RandomGenerator;
 
-class AccountUtil
+class AccountNumberUtil
 {
     public static function getRandomAccountNumber(): string
     {
