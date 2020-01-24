@@ -11,18 +11,27 @@ namespace App\Observers;
 
 use App\Account;
 use App\Currency;
+use App\Services\AccountService;
 use App\User;
-use App\Util\AccountUtil;
-use DebugBar\DebugBar;
 
 class UserObserver
 {
+    /**
+     * @var AccountService
+     */
+    private $service;
+
+    public function __construct(AccountService $service)
+    {
+        $this->service = $service;
+    }
+
     public function created(User $user)
     {
         // create account
         $account = new Account();
         $account->user_id = $user->id;
-        $account->account_number = AccountUtil::generateAccountNumber();
+        $account->account_number = $this->service->generateAccountNumber();
         $account->currency_id = Currency::first()->id;
         $account->balance = 1000.00;
         $user->accounts()->save($account);
