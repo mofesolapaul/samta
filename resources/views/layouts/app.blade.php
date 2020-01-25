@@ -15,6 +15,7 @@
 </head>
 <body>
 <div id="app">
+    @auth
     <div id="offcanvas-slide" uk-offcanvas="mode: slide; overlay: true;">
         <div class="uk-offcanvas-bar">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
@@ -33,6 +34,8 @@
             </ul>
         </div>
     </div>
+    @endauth
+
     <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">
         <div class="uk-container uk-container-expand uk-width-1-1">
 
@@ -86,5 +89,6 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+@yield('js');
 </body>
 </html>

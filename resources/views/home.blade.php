@@ -21,3 +21,11 @@
     </div>
 
 @endsection
+
+@section('js')
+    <script>
+        $(function () {
+            UIKit.offcanvas($('#offcanvas-slide')).show();
+        });
+    </script>
+@endsection

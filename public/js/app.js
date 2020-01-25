@@ -1183,10 +1183,6 @@ module.exports = __webpack_require__(37);
 
 __webpack_require__(13);
 
-$(function () {
-  UIKit.offcanvas($('#offcanvas-slide')).show();
-});
-
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
