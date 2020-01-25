@@ -7,6 +7,7 @@
  */
 
 use App\Account;
+use App\Transaction;
 
 /**
  * @param string $accountNumber
@@ -23,12 +24,17 @@ function format_account_number(string $accountNumber)
  */
 function format_account_balance(Account $account)
 {
-    return sprintf('%s%s', $account->currency->symbol, number_format($account->balance, 2));
+    return format_money($account->balance, $account->currency->symbol);
 }
 
-function format_money($amount)
+/**
+ * @param float $amount
+ * @param string $currency
+ * @return string
+ */
+function format_money(float $amount, string $currency)
 {
-    return sprintf('€%s', number_format($amount, 2));
+    return sprintf('%s%s', $currency, number_format($amount, 2));
 }
 
 /**
@@ -59,4 +65,16 @@ function inverse(float $value)
 function are_currencies_different(Account $sender, Account $receiver)
 {
     return $sender->currency->code !== $receiver->currency->code;
+}
+
+/**
+ * @param Transaction $transaction
+ * @param Account $accountInView
+ * @return string
+ */
+function cherrypickTransactionValue(Transaction $transaction, Account $accountInView)
+{
+    $itsMe = $transaction->sender->id === $accountInView->id;
+    $value = $itsMe ? $transaction->sent_amount : $transaction->received_amount;
+    return format_money($value, $accountInView->currency->symbol);
 }

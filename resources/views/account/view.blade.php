@@ -17,6 +17,7 @@
                     <thead>
                     <tr>
                         <th>Date</th>
+                        <th>Type</th>
                         <th>Amount</th>
                         <th>Account</th>
                         <th>Status</th>
@@ -26,9 +27,15 @@
                     @foreach($transactions as $transaction)
                         <tr>
                             <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('j-m-Y H:i:s') }}</td>
-                            <td>{{ format_money($transaction->amount) }}</td>
+                            <td>
+                                <span class="uk-label uk-label-{{ $transaction->sender->id === $account->id ? 'warning':'success' }}">
+                                    {{ $transaction->sender->id === $account->id ? 'debit':'credit' }}
+                                </span>
+                            </td>
+                            <td>{{ cherrypickTransactionValue($transaction, $account) }}</td>
                             <td>{{ format_account_number($transaction->receiver->account_number) }}</td>
-                            <td>{{ $transaction->status }}</td>
+                            <td title="{{ $transaction->status ? 'Successful':'Failed' }}"><span
+                                        uk-icon="{{ $transaction->status ? 'check':'close' }}"></span></td>
                         </tr>
                     @endforeach
                     </tbody>

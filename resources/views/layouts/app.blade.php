@@ -58,54 +58,56 @@
         </div>
     @endauth
 
-    <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">
-        <div class="uk-container uk-container-expand uk-width-1-1">
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">
+            <div class="uk-container uk-container-expand uk-width-1-1">
 
-            <nav class="uk-navbar">
+                <nav class="uk-navbar">
 
-                <div class="uk-navbar-left">
-                    <!-- Branding Image -->
-                    <span class="uk-navbar-item" href="{{ url('/') }}">
+                    <div class="uk-navbar-left">
+                        <!-- Branding Image -->
+                        <span class="uk-navbar-item" href="{{ url('/') }}">
                             <span class="uk-button uk-button-default uk-margin-small-right" uk-icon="menu"
                                   uk-toggle="target: #offcanvas-slide" type="button"></span> &nbsp;
                             <a class="uk-logo">{{ config('app.name', 'Laravel') }}</a>
                         </span>
-                </div>
+                    </div>
 
-                <div class="uk-navbar-right">
-                    <ul class="uk-navbar-nav">
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li>
-                                <a href="#" uk-icon="icon: user; ratio: 2" title="{{ Auth::user()->name }}"></a>
-                                <div class="uk-navbar-dropdown">
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li>
-                                            <a href="{{ route('home') }}">Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
+                    <div class="uk-navbar-right">
+                        <ul class="uk-navbar-nav">
+                            @if (Auth::guest())
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                            @else
+                                <li>
+                                    <a href="#" uk-icon="icon: user; ratio: 2" title="{{ Auth::user()->name }}"></a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li>
+                                                <a href="{{ route('home') }}">Dashboard</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
+                                                    Logout
+                                                </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                  style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                      style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
 
-            </nav>
+                </nav>
 
+            </div>
         </div>
     </div>
 
