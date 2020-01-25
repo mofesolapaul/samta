@@ -8,6 +8,7 @@
 
 use App\Account;
 use App\Transaction;
+use Carbon\Carbon;
 
 /**
  * @param string $accountNumber
@@ -70,11 +71,18 @@ function are_currencies_different(Account $sender, Account $receiver)
 /**
  * @param Transaction $transaction
  * @param Account $accountInView
- * @return string
+ * @return array
  */
-function cherrypickTransactionValue(Transaction $transaction, Account $accountInView)
+function cherrypickRelevantTransactionDetails(Transaction $transaction, Account $accountInView)
 {
     $itsMe = $transaction->sender->id === $accountInView->id;
     $value = $itsMe ? $transaction->sent_amount : $transaction->received_amount;
-    return format_money($value, $accountInView->currency->symbol);
+    $account = $itsMe ? $transaction->receiver->account_number : $transaction->sender->account_number;
+    return [
+        'date' => Carbon::parse($transaction->created_at)->format('j-m-Y H:i:s'),
+        'originator' => $itsMe,
+        'amount' => format_money($value, $accountInView->currency->symbol),
+        'account' => format_account_number($account),
+        'status' => $transaction->status ? 'Successful' : 'Failed'
+    ];
 }

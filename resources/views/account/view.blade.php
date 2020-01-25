@@ -26,16 +26,18 @@
                     <tbody>
                     @foreach($transactions as $transaction)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('j-m-Y H:i:s') }}</td>
+                            @php ($data = cherrypickRelevantTransactionDetails($transaction, $account))
+                            <td>{{ $data['date'] }}</td>
                             <td>
-                                <span class="uk-label uk-label-{{ $transaction->sender->id === $account->id ? 'warning':'success' }}">
-                                    {{ $transaction->sender->id === $account->id ? 'debit':'credit' }}
+                                <span class="uk-label uk-label-{{ $data['originator'] ? 'warning':'success' }}">
+                                    {{ $data['originator'] ? 'debit':'credit' }}
                                 </span>
                             </td>
-                            <td>{{ cherrypickTransactionValue($transaction, $account) }}</td>
-                            <td>{{ format_account_number($transaction->receiver->account_number) }}</td>
-                            <td title="{{ $transaction->status ? 'Successful':'Failed' }}"><span
-                                        uk-icon="{{ $transaction->status ? 'check':'close' }}"></span></td>
+                            <td>{{ $data['amount'] }}</td>
+                            <td>{{ $data['account'] }}</td>
+                            <td title="{{ $data['status'] }}">
+                                <span uk-icon="{{ $transaction->status ? 'check':'close' }}"></span>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
