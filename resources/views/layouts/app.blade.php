@@ -35,15 +35,18 @@
                 <button class="uk-offcanvas-close" type="button" uk-close></button>
                 <h3>My Accounts</h3>
                 <ul class="uk-list uk-list-striped">
-                    @foreach(Auth::user()->accounts as $account)
-                        <a href="{{ route('account.show', ['id' => $account->id]) }}">
-                            <li>
-                                {!!
-                                   format_account_number($account->account_number) .' ('.
-                                   format_account_balance($account) . ')'
-                                !!}
-                            </li>
-                        </a>
+                    @foreach(Auth::user()->accounts as $index => $account)
+                        <li>
+                            <a href="{{ route('account.show', ['id' => $account->id]) }}">
+                                <div>
+                                    {!!
+                                       $index + 1 . '. ' .
+                                       format_account_number($account->account_number) .' ('.
+                                       format_account_balance($account) . ')'
+                                    !!}
+                                </div>
+                            </a>
+                        </li>
                     @endforeach
                     <p>
                         <a class="uk-button uk-button-secondary" href="{{ route('account.create') }}">
@@ -79,6 +82,9 @@
                                 <a href="#" uk-icon="icon: user; ratio: 2" title="{{ Auth::user()->name }}"></a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('home') }}">Dashboard</a>
+                                        </li>
                                         <li>
                                             <a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
