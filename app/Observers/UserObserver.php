@@ -28,12 +28,9 @@ class UserObserver
 
     public function created(User $user)
     {
-        // create account
-        $account = new Account();
-        $account->user_id = $user->id;
-        $account->account_number = $this->service->generateAccountNumber();
-        $account->currency_id = Currency::first()->id;
+        // create and credit account
+        $account = $this->service->createNewAccount($user->id);
         $account->balance = 1000.00;
-        $user->accounts()->save($account);
+        $account->save();
     }
 }

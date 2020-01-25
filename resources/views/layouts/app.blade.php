@@ -45,6 +45,11 @@
                             </li>
                         </a>
                     @endforeach
+                    <p>
+                        <a class="uk-button uk-button-secondary" href="{{ route('account.create') }}">
+                            Add New Account
+                        </a>
+                    </p>
                 </ul>
             </div>
         </div>

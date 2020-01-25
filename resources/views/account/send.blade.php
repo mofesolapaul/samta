@@ -25,7 +25,7 @@
                         ])
                 !!}
                 {!! Form::text('amount', 'Amount')->type('number')->attrs(['max' => $account->balance, 'step' => 0.01]) !!}
-                {!! Form::submit("Send") !!}
+                {!! Form::submit("Send")->attrs(['class' => 'uk-button-primary']) !!}
             </form>
         </div>
     </div>

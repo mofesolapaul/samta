@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Account;
+use App\Currency;
 use App\Events\TransactionOccurred;
 use App\Exceptions\TransferException;
 use App\Transaction;
@@ -63,5 +64,22 @@ class AccountService
             throw new TransferException(__('accounts.insufficient_funds'));
         }
         return $sender;
+    }
+
+    /**
+     * @param $user_id
+     * @param string|null $currency
+     * @return Account
+     */
+    public function createNewAccount($user_id, $currency = null): Account
+    {
+        $account = new Account();
+        $account->user_id = $user_id;
+        $account->account_number = $this->generateAccountNumber();
+        $account->currency_id = $currency ? Currency::where([
+            'code' => $currency
+        ])->first()->id : Currency::first()->id;
+        $account->save();
+        return $account;
     }
 }

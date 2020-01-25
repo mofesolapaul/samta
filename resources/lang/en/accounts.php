@@ -5,4 +5,5 @@ return [
     'number_of_accounts' => ':count active account|:count active accounts',
     'impossible_transfer' => 'You cannot send money to the same account.',
     'transfer_successful' => 'Transfer completed successfully!',
+    'new_account_created' => 'New :currency account created successfully!',
 ];

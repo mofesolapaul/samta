@@ -12,11 +12,31 @@
                 </h3>
             </div>
             <h3 class="uk-heading-bullet">All Transactions</h3>
-            @forelse($transactions as $transaction)
-            @empty
+            @if($transactions->count())
+                <table class="uk-table uk-table-hover uk-table-divider">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Account</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($transactions as $transaction)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('j-m-Y') }}</td>
+                            <td>{{ format_money($transaction->amount) }}</td>
+                            <td>{{ format_account_number($transaction->receiver->account_number) }}</td>
+                            <td>{{ $transaction->status }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                {{ $transactions->links() }}
+            @else
                 <p>You have not made any transaction yet</p>
-            @endforelse
-            {{ $transactions->links() }}
+            @endif
             <a class="uk-button uk-button-primary" href="{{ route('account.send', $account) }}">
                 Send Money
             </a>

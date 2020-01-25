@@ -17,6 +17,6 @@ class AccountRepository
     {
         return Transaction::orWhere(['sender_id' => ':id', 'receiver_id' => ':id'])
             ->setBindings([$account_id, $account_id])
-            ->paginate(10);
+            ->paginate(5);
     }
 }

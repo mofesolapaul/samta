@@ -25,3 +25,8 @@ function format_account_balance(Account $account)
 {
     return sprintf('%s%s', $account->currency->symbol, number_format($account->balance, 2));
 }
+
+function format_money($amount)
+{
+    return sprintf('€%s', number_format($amount, 2));
+}

@@ -8,7 +8,7 @@
             <div class="uk-card uk-card-primary uk-card-body">
                 <h3 class="uk-card-title">Welcome, {{ Auth::user()->name }}</h3>
                 <p>You
-                    have {{ trans_choice('accounts.number_of_accounts', ['count' => Auth::user()->accounts->count()]) }}</p>
+                    have {{ trans_choice('accounts.number_of_accounts', Auth::user()->accounts->count()) }}</p>
             </div>
 
             <p>

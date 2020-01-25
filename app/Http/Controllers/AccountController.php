@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Exceptions\TransferException;
 use App\Repository\AccountRepository;
+use App\Repository\CurrencyRepository;
 use App\Services\AccountService;
 use Illuminate\Http\Request;
 
@@ -20,20 +21,29 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CurrencyRepository $currencyRepository)
     {
-        //
+        return view('account.create', [
+            'currencies' => $currencyRepository->getAllCurrenciesInSimpleArray(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param AccountService $accountService
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, AccountService $accountService)
     {
-        //
+        $request->validate([
+            'currency' => 'required|exists:currencies,code',
+        ]);
+        $account = $accountService->createNewAccount(\Auth::user()->id, $request->request->get('currency'));
+        return redirect()->route('account.show', $account)->with([
+            'success' => __('accounts.new_account_created', ['currency' => $request->request->get('currency')])
+        ]);
     }
 
     /**

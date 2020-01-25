@@ -12,11 +12,11 @@ class Transaction extends Model
 
     public function sender()
     {
-        return $this->hasOne(Account::class, null, 'sender_id');
+        return $this->hasOne(Account::class, 'id', 'sender_id');
     }
 
     public function receiver()
     {
-        return $this->hasOne(Account::class, null, 'receiver_id');
+        return $this->hasOne(Account::class, 'id', 'receiver_id');
     }
 }
