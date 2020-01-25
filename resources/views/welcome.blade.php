@@ -79,12 +79,13 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    {{ config('app.name') }}
-                </div>
+                <div class="title m-b-md">Samta</div>
 
                 <div class="links">
                     Sign up today and receive €1,000 bonus!
+                </div>
+                <div class="uk-margin">
+                    <a class="uk-button uk-button-primary" href="{{ route('register') }}">Register</a>
                 </div>
             </div>
         </div>
