@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($transactions as $transaction)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('j-m-Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('j-m-Y H:i:s') }}</td>
                             <td>{{ format_money($transaction->amount) }}</td>
                             <td>{{ format_account_number($transaction->receiver->account_number) }}</td>
                             <td>{{ $transaction->status }}</td>
