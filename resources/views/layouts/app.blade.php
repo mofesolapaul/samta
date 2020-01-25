@@ -69,7 +69,7 @@
                         <span class="uk-navbar-item" href="{{ url('/') }}">
                             <span class="uk-button uk-button-default uk-margin-small-right" uk-icon="menu"
                                   uk-toggle="target: #offcanvas-slide" type="button"></span> &nbsp;
-                            <a class="uk-logo">{{ config('app.name', 'Laravel') }}</a>
+                            <a class="uk-logo">Samta</a>
                         </span>
                     </div>
 
