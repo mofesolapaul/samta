@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
     /**
@@ -41,12 +36,14 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Account  $account
+     * @param  \App\Account $account
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Account $account)
     {
-        return response($account->currency->code);
+        $this->authorize('view', $account);
+        return view('account.view', ['account' => $account]);
     }
 
     /**
