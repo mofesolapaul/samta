@@ -26,7 +26,7 @@
                         <li>
                             {!!
                                format_account_number($account->account_number) .' ('.
-                               $account->currency->symbol . $account->balance . ')'
+                               format_account_balance($account) . ')'
                             !!}
                         </li>
                     </a>
