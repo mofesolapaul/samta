@@ -40,22 +40,27 @@ class AccountService
      */
     public function performAccountToAccountTransfer(Account $sender, Account $receiver, float $amount): Account
     {
+        if ($sender->account_number === $receiver->account_number) {
+            throw new TransferException(__('accounts.impossible_transfer'));
+        }
+
         $transaction = new Transaction();
-        $transaction->sender()->setModel($sender);
-        $transaction->sender()->setModel($receiver);
+        $transaction->sender_id = $sender->id;
+        $transaction->receiver_id = $receiver->id;
+        $transaction->amount = $amount;
 
         if ($sender->balance - $amount < 0) {
             $transaction->status = false;
         } else {
-            $sender->balance -= $amount;
-            $receiver->balance += $amount;
+            $transaction->sender_balance = $sender->balance -= $amount;
+            $transaction->receiver_balance = $receiver->balance += $amount;
             $sender->save();
             $receiver->save();
         }
 
         event(new TransactionOccurred($transaction));
         if (!$transaction->status) {
-            throw new TransferException(__('insufficient_funds'));
+            throw new TransferException(__('accounts.insufficient_funds'));
         }
         return $sender;
     }

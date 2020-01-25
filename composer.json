@@ -10,7 +10,8 @@
         "ircmaxell/random-lib": "^1.2",
         "laravel-frontend-presets/uikit3": "^0.0.8",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "eduardosaveiga/laravel-uikit-3-forms": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

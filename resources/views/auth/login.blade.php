@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', "Login")
 @section('content')
     <div class="uk-section">
         <div class="uk-container uk-container-center">

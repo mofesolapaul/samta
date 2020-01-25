@@ -8,32 +8,46 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    @auth
-    <div id="offcanvas-slide" uk-offcanvas="mode: slide; overlay: true;">
-        <div class="uk-offcanvas-bar">
-            <button class="uk-offcanvas-close" type="button" uk-close></button>
-            <h3>My Accounts</h3>
-            <ul class="uk-list uk-list-striped">
-                @foreach(Auth::user()->accounts as $account)
-                    <a href="{{ route('account.show', ['id' => $account->id]) }}">
-                        <li>
-                            {!!
-                               format_account_number($account->account_number) .' ('.
-                               format_account_balance($account) . ')'
-                            !!}
-                        </li>
-                    </a>
-                @endforeach
-            </ul>
+    @if(session()->has('message'))
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session()->get('message') }}</p>
         </div>
-    </div>
+    @endif
+
+    @if(session()->has('success'))
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session()->get('success') }}</p>
+        </div>
+    @endif
+
+    @auth
+        <div id="offcanvas-slide" uk-offcanvas="mode: slide; overlay: true;">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>My Accounts</h3>
+                <ul class="uk-list uk-list-striped">
+                    @foreach(Auth::user()->accounts as $account)
+                        <a href="{{ route('account.show', ['id' => $account->id]) }}">
+                            <li>
+                                {!!
+                                   format_account_number($account->account_number) .' ('.
+                                   format_account_balance($account) . ')'
+                                !!}
+                            </li>
+                        </a>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     @endauth
 
     <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">

@@ -17,7 +17,7 @@ class TransactionOccurred
     /**
      * @var Transaction
      */
-    private $transaction;
+    public $transaction;
 
     /**
      * Create a new event instance.

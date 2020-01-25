@@ -22,4 +22,5 @@ Route::group(['prefix' => 'account', 'as' => 'account.'], function() {
     Route::get('{account}', 'AccountController@show')->name('show');
     Route::get('create', 'AccountController@create')->name('create');
     Route::get('{account}/send', 'AccountController@sendMoney')->name('send');
+    Route::post('{account}/transfer', 'AccountController@transfer')->name('transfer');
 });

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', "My account")
 @section('content')
 
     <div class="uk-section">

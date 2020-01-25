@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5e927784197c2618c8fe967b0b73d5d",
+    "content-hash": "1812b87cc1898ed731f7e7d1f5851ae3",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -167,6 +167,58 @@
                 "php"
             ],
             "time": "2019-10-30T14:39:59+00:00"
+        },
+        {
+            "name": "eduardosaveiga/laravel-uikit-3-forms",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eduardosaveiga/laravel-uikit-3-forms.git",
+                "reference": "d4d16b510c1e1ebee9ddb4ca920a11bb7d567a9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eduardosaveiga/laravel-uikit-3-forms/zipball/d4d16b510c1e1ebee9ddb4ca920a11bb7d567a9d",
+                "reference": "d4d16b510c1e1ebee9ddb4ca920a11bb7d567a9d",
+                "shasum": ""
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EduardoVeiga\\Uikit3Forms\\Uikit3FormsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Form": "EduardoVeiga\\Uikit3Forms\\Uikit3FormsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EduardoVeiga\\Uikit3Forms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Veiga",
+                    "email": "eduardosaveiga@gmail.com"
+                }
+            ],
+            "description": "UIKit 3 form builder for Laravel 5",
+            "keywords": [
+                "Forms",
+                "composer",
+                "form-builder",
+                "laravel",
+                "package",
+                "php",
+                "uikit"
+            ],
+            "time": "2018-09-20T18:14:33+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -5724,7 +5776,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "eduardosaveiga/laravel-uikit-3-forms": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -26,6 +26,6 @@ class LogTransaction
      */
     public function handle(TransactionOccurred $event)
     {
-        //
+        $event->transaction->save();
     }
 }
