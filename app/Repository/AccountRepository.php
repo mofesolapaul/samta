@@ -16,6 +16,7 @@ class AccountRepository
     public function getAllTransactions($account_id)
     {
         return Transaction::orWhere(['sender_id' => ':id', 'receiver_id' => ':id'])
+            ->orderBy('id', 'desc')
             ->setBindings([$account_id, $account_id])
             ->paginate(5);
     }

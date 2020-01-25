@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Exceptions\Currency\ExchangeRatesException;
 use App\Exceptions\TransferException;
 use App\Repository\AccountRepository;
 use App\Repository\CurrencyRepository;
@@ -80,7 +81,7 @@ class AccountController extends Controller
     {
         $request->validate([
             'receiver' => 'required|max:8|exists:accounts,account_number',
-            'amount' => 'required|numeric'
+            'amount' => 'required|numeric|min:1.00'
         ]);
         try {
             $accountService->performAccountToAccountTransfer($account,
@@ -90,6 +91,7 @@ class AccountController extends Controller
             return redirect()->back()->withInput()->with([
                 'message' => $e->getMessage()
             ]);
+        } catch (ExchangeRatesException $e) {
         }
         return redirect()->back()->with(['success' => __('accounts.transfer_successful')]);
     }

@@ -12,12 +12,23 @@ namespace App\Services;
 use App\Account;
 use App\Currency;
 use App\Events\TransactionOccurred;
+use App\Exceptions\Currency\ExchangeRatesException;
 use App\Exceptions\TransferException;
 use App\Transaction;
 use App\Util\AccountNumberUtil;
 
 class AccountService
 {
+    /**
+     * @var ExchangeRatesService
+     */
+    private $ratesService;
+
+    public function __construct(ExchangeRatesService $ratesService)
+    {
+        $this->ratesService = $ratesService;
+    }
+
     public function generateAccountNumber(array $memo = []): string
     {
         $accountNumber = AccountNumberUtil::getRandomAccountNumber();
@@ -38,6 +49,7 @@ class AccountService
      * @param float $amount
      * @return Account
      * @throws TransferException
+     * @throws ExchangeRatesException
      */
     public function performAccountToAccountTransfer(Account $sender, Account $receiver, float $amount): Account
     {
@@ -48,15 +60,17 @@ class AccountService
         $transaction = new Transaction();
         $transaction->sender_id = $sender->id;
         $transaction->receiver_id = $receiver->id;
-        $transaction->amount = $amount;
+        $transaction->sent_amount = $amount;
 
-        if ($sender->balance - $amount < 0) {
-            $transaction->status = false;
-        } else {
+        if ($sender->balance - $amount >= 0) {
+            $transaction->received_amount = are_currencies_different($sender, $receiver)
+                ? $this->ratesService->convert($sender->currency->code, $receiver->currency->code, $amount)
+                : $amount;
             $transaction->sender_balance = $sender->balance -= $amount;
-            $transaction->receiver_balance = $receiver->balance += $amount;
+            $transaction->receiver_balance = $receiver->balance += $transaction->received_amount;
             $sender->save();
             $receiver->save();
+            $transaction->status = true;
         }
 
         event(new TransactionOccurred($transaction));

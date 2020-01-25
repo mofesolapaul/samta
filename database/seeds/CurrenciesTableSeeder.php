@@ -22,9 +22,9 @@ class CurrenciesTableSeeder extends Seeder
             'updated_at' => \Carbon\Carbon::now(),
         ]);
         DB::table('currencies')->insert([
-            'symbol'    => '₦',
-            'code'      => 'NGN',
-            'name'      => 'Naira',
+            'symbol'    => '£',
+            'code'      => 'GBP',
+            'name'      => 'British Pound',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

@@ -6,12 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "eduardosaveiga/laravel-uikit-3-forms": "dev-master",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.5",
         "ircmaxell/random-lib": "^1.2",
         "laravel-frontend-presets/uikit3": "^0.0.8",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "eduardosaveiga/laravel-uikit-3-forms": "dev-master"
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

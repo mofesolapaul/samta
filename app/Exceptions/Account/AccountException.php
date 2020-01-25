@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Account;
 
-use Exception;
+use App\Exceptions\AppException;
 
-class AccountException extends Exception
+class AccountException extends AppException
 {
 }

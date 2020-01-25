@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $attributes = [
-        'status' => true
+        'status' => false
     ];
 
     public function sender()
