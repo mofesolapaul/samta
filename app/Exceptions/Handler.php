@@ -54,7 +54,9 @@ class Handler extends ExceptionHandler
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'Unauthorized'], 403);
             }
-            return redirect()->route('home');
+            return redirect()->back()->with([
+                'message' => 'Account not found!'
+            ]);
         }
         return parent::render($request, $exception);
     }

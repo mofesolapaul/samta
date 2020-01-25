@@ -64,8 +64,14 @@ class AccountController extends Controller
         ]);
     }
 
+    /**
+     * @param Account $account
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function sendMoney(Account $account)
     {
+        $this->authorize('view', $account);
         return view('account.send', [
             'account' => $account,
         ]);
@@ -76,9 +82,11 @@ class AccountController extends Controller
      * @param Account $account
      * @param AccountService $accountService
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function transfer(Request $request, Account $account, AccountService $accountService)
     {
+        $this->authorize('view', $account);
         $request->validate([
             'receiver' => 'required|max:8|exists:accounts,account_number',
             'amount' => 'required|numeric|min:1.00'
